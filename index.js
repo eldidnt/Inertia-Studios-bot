@@ -1,6 +1,12 @@
 const { GatewayIntentBits, Client, Collection } = require('discord.js');
+const Discord = require('discord.js');
+const { GiveawaysManager } = require('discord-giveaways');
+require('colors');
 const client = new Client({
     intents: [
+        Discord.IntentsBitField.Flags.Guilds,
+        Discord.IntentsBitField.Flags.GuildMessageReactions,
+        Discord.IntentsBitField.Flags.GuildMembers,
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildBans,
         GatewayIntentBits.GuildMembers,
@@ -21,10 +27,18 @@ const client = new Client({
 const config = require(`${process.cwd()}/config`);
 const fs = require('fs');
 
-require('colors');
+const giveaways = new GiveawaysManager(client, {
+    storage: './giveaways.json',
+    default: {
+        botsCanWin: false,
+        embedColor: '#FF0000',
+        embedColorEnd: '#000000',
+        reaction: '🎉'
+    }
+});
 
+client.giveawaysManager = giveaways;
 client.login(config.token)
-
 client.config = config;
 
 //command handler
@@ -54,4 +68,3 @@ fs.readdirSync('./events').forEach((dir) => {
         }
     }
 })
-

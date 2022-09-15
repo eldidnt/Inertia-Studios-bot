@@ -4,6 +4,7 @@ module.exports = {
     color: "#3E3E3E",
     errorColor: "#FF3A3A",
     channels: {
-        welcome: "919726777943859212",
+        welcome: "991575190691663874",
+        rules: "991015033611894844"
       },
 }

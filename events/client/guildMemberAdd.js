@@ -1,11 +1,12 @@
-const { AttachmentBuilder } = require('discord.js');
+const { AttachmentBuilder, EmbedBuilder } = require('discord.js');
 const { createCanvas, Image } = require('@napi-rs/canvas');
 const { readFile } = require('fs/promises');
 const { request } = require('undici');
 const { channels } = require("../../config");
+
 module.exports =  {
     name: "guildMemberAdd",
-    run: async (member) => {
+    run: async (member, client) => {
         console.log(`${member.user.username}#${member.user.discriminator}(${member.user.id}) ha entrado al servidor`);
 
         //image
@@ -39,7 +40,7 @@ module.exports =  {
         context.closePath();
         context.clip();
 
-        const { body } = await request(message.author.displayAvatarURL({ format: 'jpg', size: 512}));
+        const { body } = await request(member.user.displayAvatarURL({ format: 'jpg', size: 512}));
         const avatar = new Image();
         avatar.src = Buffer.from(await body.arrayBuffer());
         context.drawImage(avatar, 50, 110, 500, 500);
@@ -47,7 +48,17 @@ module.exports =  {
         const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'profile-image.png' });
 
         member.guild.channels.cache.get(channels.welcome).send({
-            content: `Bienvenido <@${member.user.id}> a <@${member.guild.name}>`,
+            embeds: [ new EmbedBuilder()
+                .setTitle('Bienvenido a ' + member.guild.name)
+                .setDescription('\nNo olvides pasarte por <#'+ channels.rules +'>\nEspero que te diviertas en el servidor')
+                .setColor(client.config.color)
+                .setFooter({
+                    text:member.user.id,
+                    iconURL: member.user.displayAvatarURL()
+                })
+                .setTimestamp()
+                .setImage('attachment://profile-image.png'),
+            ],
             files: [attachment]
         });
     }
