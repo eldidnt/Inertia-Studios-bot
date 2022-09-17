@@ -8,7 +8,7 @@ module.exports = {
         let messageId = args[0];
         if(!args || !messageId) return message.channel.send({ embeds: [new EmbedBuilder()
             .setTitle('Error')
-            .setDescription('**Uso correcto:** `' + `${prefix}greroll (id sorteo)` +'`\nIngresa un mensaje valido para enviar')
+            .setDescription('**Uso correcto:** `' + `${prefix}greroll (id sorteo)`)
             .setColor(client.config.errorColor)
             ]
         }).then(async m => { setTimeout(() => { m.delete() }, 5000) });
@@ -17,7 +17,12 @@ module.exports = {
         .then(() => {
         })
         .catch((err) => {
-            message.reply(`Un error ha ocurrido:\n\`${err}\``);
+            message.reply({ embeds: [new EmbedBuilder()
+                .setTitle('Error')
+                .setDescription('**Uso correcto:** `' + `${prefix}greroll (id sorteo)`)
+                .setColor(client.config.errorColor)
+                ]
+            }).then(async m => { setTimeout(() => { m.delete() }, 5000) });
         });
     }
 }
