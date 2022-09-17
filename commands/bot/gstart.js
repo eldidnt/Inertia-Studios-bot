@@ -7,7 +7,7 @@ module.exports = {
         if(!message.member.permissions.has('Administrator')) return;
         if(!args || args.length < 3) return message.channel.send({ embeds: [new EmbedBuilder()
             .setTitle('Error')
-            .setDescription('**Uso correcto:** `' + `${prefix}gstart (duracion) (cantidad) (premio)` +'`\nIngresa un mensaje valido para enviar')
+            .setDescription('**Uso correcto:** `' + `${prefix}gstart (duracion) (cantidad) (premio)`)
             .setColor(client.config.errorColor)
             ]
         }).then(async m => { setTimeout(() => { m.delete() }, 5000) });
@@ -16,10 +16,30 @@ module.exports = {
         .start(message.channel, {
             duration: ms(args[0]),
             winnerCount: parseInt(args[1]),
-            prize: args.slice(2).join(" ")
+            prize: args.slice(2).join(" "),
+            messages: {
+                giveaway: '🎉🎉 **SORTEO** 🎉🎉',
+                giveawayEnded: '🎉🎉 **SORTEO TERMINADO** 🎉🎉',
+                title: '{this.prize}',
+                drawing: 'Terminando en: {timestamp}',
+                dropMessage: 'Se el primero en reaccionar con 🎉 !',
+                inviteToParticipate: '¡Reacciona con 🎉 para participar!',
+                winMessage: 'Felicidades {winners}! Has**{this.prize}**!',
+                embedFooter: '{this.winnerCount} winner(s)',
+                noWinner: 'Giveaway cancelled, no valid participations.',
+                hostedBy: 'Hosted by: {this.hostedBy}',
+                winners: 'Winner(s):',
+                endedAt: 'Ended at'
+            }
         })
         .catch((err) => {
-            message.reply(`Un error ha ocurrido:\n\`${err}\``);
+            message.reply({ embeds: [new EmbedBuilder()
+                .setTitle('Error')
+                .setDescription('**Uso correcto:** `' + `${prefix}gstart (duracion) (cantidad) (premio)`)
+                .setColor(client.config.errorColor)
+                ]
+            }).then(async m => { setTimeout(() => { m.delete() }, 5000) });
+            
         });
     }
 }
