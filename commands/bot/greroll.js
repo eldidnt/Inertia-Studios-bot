@@ -5,8 +5,8 @@ module.exports = {
     aliases: ["resortear", "giveawayreroll"],
     run: async (client, message, args, prefix) => {
         if(!message.member.permissions.has('Administrator')) return;
-        let messageID = args[0];
-        if(!args || !messageID) return message.channel.send({ embeds: [new EmbedBuilder()
+        let messageId = args[0];
+        if(!args || !messageId) return message.channel.send({ embeds: [new EmbedBuilder()
             .setTitle('Error')
             .setDescription('**Uso correcto:** `' + `${prefix}greroll (id sorteo)` +'`\nIngresa un mensaje valido para enviar')
             .setColor(client.config.errorColor)
@@ -15,7 +15,6 @@ module.exports = {
 
         client.giveawaysManager.reroll(messageId)
         .then(() => {
-            message.reply('Premio resorteado');
         })
         .catch((err) => {
             message.reply(`Un error ha ocurrido:\n\`${err}\``);

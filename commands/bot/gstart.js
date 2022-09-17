@@ -12,18 +12,14 @@ module.exports = {
             ]
         }).then(async m => { setTimeout(() => { m.delete() }, 5000) });
         
-        let a = args[2].join(" ")
-        console.log(args[0])
-        console.log(args[1])
-        console.log(a)
-        // client.giveawaysManager
-        // .start(message.channel, {
-        //     time: ms(args[0]),
-        //     winnerCount: parseInt(args[1]),
-        //     prize: args.slice(2).join(" ")
-        // })
-        // .catch((err) => {
-        //     message.reply(`Un error ha ocurrido:\n\`${err}\``);
-        // });
+        client.giveawaysManager
+        .start(message.channel, {
+            duration: ms(args[0]),
+            winnerCount: parseInt(args[1]),
+            prize: args.slice(2).join(" ")
+        })
+        .catch((err) => {
+            message.reply(`Un error ha ocurrido:\n\`${err}\``);
+        });
     }
 }
