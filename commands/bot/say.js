@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require('discord.js')
 module.exports = {
-    name: "say",
+    name: "decir",
     run: async (client, message, args, prefix) => {
         if(!message.member.permissions.has('Administrator')) return;
         let msg = args.join(" ");
