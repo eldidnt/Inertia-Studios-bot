@@ -24,12 +24,12 @@ module.exports = {
                 drawing: 'Terminando en: {timestamp}',
                 dropMessage: 'Se el primero en reaccionar con 🎉 !',
                 inviteToParticipate: '¡Reacciona con 🎉 para participar!',
-                winMessage: 'Felicidades {winners}! Has**{this.prize}**!',
-                embedFooter: '{this.winnerCount} winner(s)',
-                noWinner: 'Giveaway cancelled, no valid participations.',
-                hostedBy: 'Hosted by: {this.hostedBy}',
-                winners: 'Winner(s):',
-                endedAt: 'Ended at'
+                winMessage: 'Felicidades {winners}! Has ganado **{this.prize}**!',
+                embedFooter: '{this.winnerCount} ganador(es)',
+                noWinner: 'Sorteo cancelado, no se encontraron participantes.',
+                hostedBy: 'Organizado por: {this.hostedBy}',
+                winners: 'Ganador(es):',
+                endedAt: 'Finalizado'
             }
         })
         .catch((err) => {

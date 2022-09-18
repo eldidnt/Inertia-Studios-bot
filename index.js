@@ -4,9 +4,6 @@ const { GiveawaysManager } = require('discord-giveaways');
 require('colors');
 const client = new Client({
     intents: [
-        Discord.IntentsBitField.Flags.Guilds,
-        Discord.IntentsBitField.Flags.GuildMessageReactions,
-        Discord.IntentsBitField.Flags.GuildMembers,
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildBans,
         GatewayIntentBits.GuildMembers,
@@ -21,7 +18,8 @@ const client = new Client({
         GatewayIntentBits.DirectMessages,
         GatewayIntentBits.DirectMessageTyping,
         GatewayIntentBits.DirectMessageReactions,
-        GatewayIntentBits.MessageContent
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildIntegrations
     ]
 });
 const config = require(`${process.cwd()}/config`);

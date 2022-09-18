@@ -13,9 +13,12 @@ module.exports = {
             ]
         }).then(async m => { setTimeout(() => { m.delete() }, 5000) });
 
-        client.giveawaysManager.reroll(messageId)
-        .then(() => {
-        })
+        client.giveawaysManager.reroll(messageId, {
+            messages: {
+                congrat: ':tada: Nuevo(s) ganador(es): {winners}! Felicitaciones, has ganado **{this.prize}**',
+                error: 'No hay mas participaciones validas, no se pudo sortear un nuevo ganador.'
+            }
+        }).then(() => {})
         .catch((err) => {
             message.reply({ embeds: [new EmbedBuilder()
                 .setTitle('Error')

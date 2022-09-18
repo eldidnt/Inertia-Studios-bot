@@ -8,6 +8,7 @@ module.exports = {
     alias: ['image'],
 
 run: async (client, message, args, prefix) => {
+    if(!message.member.permissions.has('Administrator')) return;
     const applyText = (canvas, text) => {
         const context = canvas.getContext('2d');
         let fontSize = 70;

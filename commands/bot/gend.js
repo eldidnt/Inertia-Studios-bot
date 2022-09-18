@@ -15,7 +15,6 @@ module.exports = {
 
         client.giveawaysManager.end(messageID)
         .then(() => {
-            message.reply('Sorteo Terminado');
         })
         .catch((err) => {
             message.reply({ embeds: [new EmbedBuilder()
