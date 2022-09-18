@@ -18,7 +18,7 @@ module.exports = {
             .setTitle('Verificate')
             .setDescription("Para acceder al servidor reaccione a este mensaje.")
             .setFooter(
-                { text: `${client.config.embedfooterText}`
+                { text: `${client.config.embedFooterText}`
                 , iconURL: `${client.user.displayAvatarURL()}`}
             );
 
